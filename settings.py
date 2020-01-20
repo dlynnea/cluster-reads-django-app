@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+# SASS_PROCESSOR_INCLUDE_DIRS = [
+#     os.path.join(PROJECT_PATH, 'extra-styles/scss'),
+#     os.path.join(PROJECT_PATH, 'node_modules'),
+# ]
+
+SASS_PROCESSOR_AUTO_INCLUDE = False
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,8 +45,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'mod3_project.core'
+    'mod3_project.core',
+    'sass_processor',
 ]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+]
+
+SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR,'static')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
