@@ -1,15 +1,28 @@
 from django.shortcuts import render, redirect
+# auth imports
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+# scraping imports
+import requests
+from bs4 import BeautifulSoup
+
+toi_r = requests.get("https://timesofindia.indiatimes.com/briefs")
+toi_soup = BeautifulSoup(toi_r.content, 'html.parser')
+
+toi_headings = toi_soup.find_all('h2')
+toi_headings = toi_headings[0:-13] #this removes the footers
+
+toi_news = []
+
+for th in toi_headings:
+    toi_news.append(th.text)
 
 def home(request):
-    count = User.objects.count()
-    return render(request, 'home.html', {
-        'count': count
-    })
+    context = {'toi_news':toi_news}
+    return render(request, 'home.html', context)
 
 def signup(request):
     if request.method == 'POST':
@@ -29,3 +42,7 @@ def secret_page(request):
 
 class SecretPage(LoginRequiredMixin, TemplateView):
     template_name = 'secret_page.html'
+
+# def index(request):
+#     context = {'toi_news':toi_news}
+#     return render(request, 'home.html', context)

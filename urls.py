@@ -20,9 +20,10 @@ from mod3_project.core import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    # path('home/', views.index, name = "index"),
     path('signup/', views.signup, name='signup'),
-    path('secret/', views.secret_page, name='secret'),
-    path('secret2/', views.SecretPage.as_view(), name='secret2'),
+    # path('secret/', views.secret_page, name='secret'),
+    # path('secret2/', views.SecretPage.as_view(), name='secret2'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
 ]
