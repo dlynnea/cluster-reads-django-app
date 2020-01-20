@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Site</title>
+</head>
+<body>
+    <h1>My Site</h1>
+    <a href="{% url 'home' %}">Home</a> /
+    {% if user.is_authenticated %}
+    <a href="{% url 'secret' %}">Secret Page</a> /
+    <a href="{% url 'secret2' %}">Secret Page (class-based view)</a> /
+    <a href="{% url 'password_change' %}">Change Password</a> /
+    <a href="{% url 'logout' %}">Log Out</a> /
+    <h4><strong>You are now logged in as {{ user.username }}</strong></h4>
+    {% else %}
+    <a href="{% url 'signup' %}">SignUp</a> /
+    <a href="{% url 'login' %}">Log In</a>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
