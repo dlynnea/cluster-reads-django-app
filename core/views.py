@@ -20,8 +20,20 @@ toi_news = []
 for th in toi_headings:
     toi_news.append(th.text)
 
+nyb_r = requests.get("https://www.nytimes.com/column/bits")
+nyb_soup = BeautifulSoup(nyb_r.content, 'html.parser')
+
+nyb_headings = nyb_soup.find_all('li', {"class": "css-ye6x8s"})
+# nyb_headings = nyb_soup.find_all()
+
+nyb_news = []
+
+for nth in nyb_headings:
+    nyb_news.append(nth.text)
+
+
 def home(request):
-    context = {'toi_news':toi_news}
+    context = {'toi_news':toi_news, 'nyb_news':nyb_news}
     return render(request, 'home.html', context)
 
 def signup(request):

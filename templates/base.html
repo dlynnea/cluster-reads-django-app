@@ -8,24 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CLUSTER</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
         <link href="{% sass_src '_base.scss' %}" rel="stylesheet" type="text/css" />
-</head>
+        <script src="https://kit.fontawesome.com/dc8aa3c6de.js" crossorigin="anonymous"></script>
+        <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
+    </head>
 <body>
-    <h1>CLUST&#1105;R&#9662;</h1>
-    <h3>...the hole enchilada</h3>
+    <main class="landing">
+    <nav class="navbar bg-dark">
+    <h1><i class="fas fa-cubes"></i> CLUSTER </h1>
     <a href="{% url 'home' %}">Home</a> |
     {% if user.is_authenticated %}
-    {% comment %} <a href="{% url 'secret' %}">Secret Page</a> /
-    <a href="{% url 'secret2' %}">Secret Page (class-based view)</a> / {% endcomment %}
+    <!-- {% comment %} <a href="{% url 'secret' %}">Secret Page</a> /
+    <a href="{% url 'secret2' %}">Secret Page (class-based view)</a> / {% endcomment %} -->
     <a href="{% url 'password_change' %}">Change Password</a> |
-    <a href="{% url 'logout' %}">Log Out</a> |
-    <h4><strong>You are now logged in as {{ user.username }}</strong></h4>
+    <a href="{% url 'logout' %}">Log Out</a> 
     {% else %}
     <a href="{% url 'signup' %}">SignUp</a> |
-    <a href="{% url 'login' %}">Log In</a>
+    <a href="{% url 'login' %}">Log In</a></nav>
     {% endif %}
+    </nav>
     {% block content %}
     {% endblock %}
+    </main>
 </body>
 </html>

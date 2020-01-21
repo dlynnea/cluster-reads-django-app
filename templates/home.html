@@ -1,19 +1,57 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load sass_tags %}
 
 {% block content %}
-<h2>Homepage</h2>
-<p>Welcome to my Site, {% if user.is_authenticated %}{{ user.username }}{% else %}visitor{% endif %}!</p>
-{% comment %} <p>Total users registered: {{ count }}</p> {% endcomment %}
- {% if user.is_authenticated %}
-    <div class="col-6">
-            <h3 class="text-centre">News from Times of india</h3>
-            {% for n in toi_news %}
-            <h5> -  {{ n }} </h5>
-            <hr>
-            {% endfor %}
-            <br>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>CLUSTER</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link href="{% sass_src '_base.scss' %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<main>
+<p>Welcome to Cluster, {% if user.is_authenticated %}{{ user.username }}{% else %}visitor{% endif %}!</p>
+{% if user.is_authenticated %}
+<h1 class="x-large">Cluster Connector</h1>
+<div class="container">
+        <div class="row">
+                <div class="col-6">
+                        <h3 class="text-center">New York Bits</h3>
+                        {% for thn in nyb_news %}
+                        <h5> >>  {{ n }} </h5>
+                        <hr>
+                        {% endfor %}
+                        <br>
+                </div>
+                <div class="col-6">
+                        <h3 class="text-center">News from Times of India</h3>
+                        {% for n in toi_news %}
+                        <h5> >>  {{ n }} </h5>
+                        <hr>
+                        {% endfor %}
+                        <br>
+                </div>
+        </div>
+</div>
     {% else %}
-    Log in to see the news!
-    {% endif %}
+    <div class="dark-overlay">
+        <div class="landing-inner">
+        <h1 class="x-large">Cluster Connector</h1>
+                <p class="lead">Create a CLUSTER profile and find your stories!</p>
+                <div class="buttons">
+                        <a href="{% url 'signup' %}" class="btn btn-primary">Create Account</a>
+                        <a href="{% url 'login' %}" class="btn">Sign In</a>
+                </div>
+        </div>
+</div>
+Log in to see the news!
+{% endif %}
+</main>
 {% endblock %}
+</body>
+</html>
